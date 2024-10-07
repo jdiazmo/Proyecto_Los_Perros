@@ -1,29 +1,35 @@
-package Trabajo_Final;import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
-    private static VectorManager vectorManager = new VectorManager();
 
     public static void main(String[] args) {
+        ArrayList<EstIngenieria> ingenieros = new ArrayList<>();
+        ArrayList<EstudianteDiseno> disenadores = new ArrayList<>();
+
+        GestionPrestamos gestion = new GestionPrestamos(ingenieros, disenadores);
+        
         Scanner scanner = new Scanner(System.in);
         int opcion;
+
         do {
-            System.out.println("Menú Principal:");
+            System.out.println("\n*** MENÚ PRINCIPAL ***");
             System.out.println("1. Estudiantes de Ingeniería");
             System.out.println("2. Estudiantes de Diseño");
             System.out.println("3. Imprimir Inventario Total");
-            System.out.println("4. Salir del Programa");
+            System.out.println("4. Salir");
             System.out.print("Seleccione una opción: ");
-            opcion = validarOpcion(scanner, 1, 4);
+            opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1:
-                    mostrarMenuIngenieria(scanner);
+                    menuIngenieria(scanner, gestion);
                     break;
                 case 2:
-                    mostrarMenuDiseno(scanner);
+                    menuDiseno(scanner, gestion);
                     break;
                 case 3:
-                    vectorManager.imprimirInventario();
+                    imprimirInventario(ingenieros, disenadores);
                     break;
                 case 4:
                     System.out.println("Saliendo del programa...");
@@ -34,88 +40,84 @@ public class Main {
         } while (opcion != 4);
     }
 
-    private static void mostrarMenuIngenieria(Scanner scanner) {
+    private static void menuIngenieria(Scanner scanner, GestionPrestamos gestion) {
         int opcion;
         do {
-            System.out.println("Menú Estudiantes de Ingeniería:");
+            System.out.println("\n*** MENÚ INGENIERÍA ***");
             System.out.println("1. Registrar préstamo de equipo");
             System.out.println("2. Modificar préstamo de equipo");
             System.out.println("3. Devolución de equipo");
             System.out.println("4. Buscar equipo");
             System.out.println("5. Volver al menú principal");
             System.out.print("Seleccione una opción: ");
-            opcion = validarOpcion(scanner, 1, 5);
-
-            switch (opcion) {
-                case 1:
-                    vectorManager.registrarPrestamoIngenieria(scanner);
-                    break;
-                case 2:
-                    vectorManager.modificarPrestamo(scanner);
-                    break;
-                case 3:
-                    vectorManager.devolucionEquipo(scanner);
-                    break;
-                case 4:
-                    vectorManager.buscarEquipo(scanner);
-                    break;
-                case 5:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida.");
-            }
-        } while (opcion != 5);
-    }
-
-    private static void mostrarMenuDiseno(Scanner scanner) {
-        int opcion;
-        do {
-            System.out.println("Menú Estudiantes de Diseño:");
-            System.out.println("1. Registrar préstamo de equipo");
-            System.out.println("2. Modificar préstamo de equipo");
-            System.out.println("3. Devolución de equipo");
-            System.out.println("4. Buscar equipo");
-            System.out.println("5. Volver al menú principal");
-            System.out.print("Seleccione una opción: ");
-            opcion = validarOpcion(scanner, 1, 5);
-
-            switch (opcion) {
-                case 1:
-                    vectorManager.registrarPrestamoDiseno(scanner);
-                    break;
-                case 2:
-                    vectorManager.modificarPrestamo(scanner);
-                    break;
-                case 3:
-                    vectorManager.devolucionEquipo(scanner);
-                    break;
-                case 4:
-                    vectorManager.buscarEquipo(scanner);
-                    break;
-                case 5:
-                    System.out.println("Volviendo al menú principal...");
-                    break;
-                default:
-                    System.out.println("Opción inválida.");
-            }
-        } while (opcion != 5);
-    }
-
-    private static int validarOpcion(Scanner scanner, int min, int max) {
-        int opcion;
-        while (true) {
-            while (!scanner.hasNextInt()) {
-                System.out.println("Opción inválida. Ingrese un número.");
-                scanner.next();
-            }
             opcion = scanner.nextInt();
-            if (opcion >= min && opcion <= max) {
-                break;
-            } else {
-                System.out.println("Opción no válida. Intente de nuevo.");
+
+            switch (opcion) {
+                case 1:
+                    gestion.registrarPrestamoIngenieria(scanner);
+                    break;
+                case 2:
+                    gestion.modificarPrestamoIngenieria(scanner);
+                    break;
+                case 3:
+                    gestion.devolverEquipoIngenieria(scanner);
+                    break;
+                case 4:
+                    gestion.buscarEquipoIngenieria(scanner);
+                    break;
+                case 5:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
             }
+        } while (opcion != 5);
+    }
+
+    private static void menuDiseno(Scanner scanner, GestionPrestamos gestion) {
+        int opcion;
+        do {
+            System.out.println("\n*** MENÚ DISEÑO ***");
+            System.out.println("1. Registrar préstamo de equipo");
+            System.out.println("2. Modificar préstamo de equipo");
+            System.out.println("3. Devolución de equipo");
+            System.out.println("4. Buscar equipo");
+            System.out.println("5. Volver al menú principal");
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    gestion.registrarPrestamoDiseno(scanner);
+                    break;
+                case 2:
+                    gestion.modificarPrestamoDiseno(scanner);
+                    break;
+                case 3:
+                    gestion.devolverEquipoDiseno(scanner);
+                    break;
+                case 4:
+                    gestion.buscarEquipoDiseno(scanner);
+                    break;
+                case 5:
+                    System.out.println("Volviendo al menú principal...");
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
+            }
+        } while (opcion != 5);
+    }
+
+    private static void imprimirInventario(ArrayList<EstIngenieria> ingenieros, ArrayList<EstudianteDiseno> disenadores) {
+        System.out.println("\n*** INVENTARIO TOTAL ***");
+        System.out.println("Estudiantes de Ingeniería:");
+        for (EstIngenieria est : ingenieros) {
+            System.out.println(est.getNombre() + " - Serial: " + est.getSerial());
         }
-        return opcion;
+
+        System.out.println("\nEstudiantes de Diseño:");
+        for (EstudianteDiseno est : disenadores) {
+            System.out.println(est.getNombre() + " - Serial: " + est.getSerial());
+        }
     }
 }

@@ -5,7 +5,7 @@ public class Estudiante {
     private String nombre;
     private String apellido;
     private String telefono;
-    private String serial;
+   
 
     public String getCedula() {
         return cedula;
@@ -30,11 +30,5 @@ public class Estudiante {
     }
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-    public String getSerial() {
-        return serial;
-    }
-    public void setSerial(String serial) {
-        this.serial = serial;
     }
 }
