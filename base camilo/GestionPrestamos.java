@@ -54,15 +54,27 @@ public class GestionPrestamos {
         }
         
         System.out.println("Estudiante encontrado: " + estudiante.getNombre() + " " + estudiante.getApellido());
-        System.out.print("Nueva Cedula: ");
-        String nuevaCedula = scanner.next();
-        estudiante.setCedula(nuevaCedula);
+
         System.out.print("Nuevo nombre: ");
         String nuevoNombre = scanner.next();
         estudiante.setNombre(nuevoNombre);
+
         System.out.print("Nuevo apellido: ");
         String nuevoApellido = scanner.next();
         estudiante.setApellido(nuevoApellido);
+
+        System.out.print("Nuevo telefono: ");
+        String nuevoTelefono = scanner.next();
+        estudiante.setTelefono(nuevoTelefono);
+
+        System.out.print("Nuevo semestre: ");
+        int nuevoSemestre= scanner.nextInt();
+        estudiante.setSemestre(nuevoSemestre);
+        
+        System.out.print("Nuevo promedio: ");
+        Double nuevoPromedio = scanner.nextDouble();
+        estudiante.setPromedio(nuevoPromedio);
+        
         System.out.println("Préstamo modificado con éxito.");
     }
 
@@ -155,10 +167,7 @@ public void modificarPrestamoDiseno(Scanner scanner) {
     }
     
     System.out.println("Estudiante encontrado: " + estudiante.getNombre() + " " + estudiante.getApellido());
-    System.out.print("Nueva cedula:");
-    String nuevaCedula = scanner.next();
-    estudiante.setCedula(nuevaCedula);
-    
+
     System.out.print("Nuevo nombre: ");
     String nuevoNombre = scanner.next();
     estudiante.setNombre(nuevoNombre);
@@ -171,7 +180,7 @@ public void modificarPrestamoDiseno(Scanner scanner) {
     String nuevaTelefono = scanner.next();
     estudiante.setTelefono(nuevaTelefono);
 
-    System.out.print("Nueva Asignatura:");
+    System.out.print("Nueva cantidad de Asignaturas:");
     int nuevaAsignatura = scanner.nextInt();
     estudiante.setAsignaturas(nuevaAsignatura);
     
